@@ -5,6 +5,8 @@ import random
 
 
 def bubbleSort(numbers):
+	# Classic Bubble sort
+	# Go through array and swap numbers in the wrong place. Keep looping through until no swaps happen (sorted).
 	swapped = True
 	while swapped:
 		swapped = False
@@ -16,6 +18,7 @@ def bubbleSort(numbers):
 
 
 def fasterBubbleSort(numbers):
+	# Bubble sort but stopping when you get to the sorted numbers on right side
 	swapped = True
 	iterations = 0
 	while swapped:
@@ -29,6 +32,8 @@ def fasterBubbleSort(numbers):
 
 
 def selectionSort(numbers):
+	# Loop through array to find smallest number and swap it with the next unsorted element.
+	# Finished when the sorted elements size is the array size. 
 	n = 0
 	while(n < len(numbers)):
 		minSize = numbers[n]
@@ -45,18 +50,42 @@ def selectionSort(numbers):
 
 
 def insertionSort(numbers):
+	# First number goes in sorted array
 	sortedNumbers = [numbers.pop()]
+
+	# Keep inserting numbers into sorted array until unsorted is empty
 	while(len(numbers) > 0):
 		nextNumber = numbers.pop()
-		broke = False
+		# If the next number doesn't get inserted during the loop, insert it at the end of the sorted array
+		inserted = False
 		for i in range(len(sortedNumbers)):
 			if nextNumber < sortedNumbers[i]:
 				sortedNumbers.insert(i, nextNumber)
-				broke = True
+				inserted = True
 				break
-		if not broke:
+		if not inserted:
 			sortedNumbers.append(nextNumber)
 	return sortedNumbers
+
+def quickSort(numbers):
+	# Base case
+	if len(numbers) <= 1:
+		return numbers
+
+	pivot = numbers[len(numbers) - 1]
+	left, right = [],[]
+
+	# Pick a pivot number and place all lower numbers in left, higher numbers in right
+	for num in numbers[:-1]:
+		if num < pivot:
+			left.append(num)
+		else:
+			right.append(num)
+
+	# Recursion
+	return quickSort(left) + pivot + quickSort(right)
+
+
 
 
 def calculateTimeComplexity(func, numbers):
@@ -94,6 +123,9 @@ print("Selection sort:")
 calculateTimeComplexity(selectionSort, numbers.copy())
 
 print("Insertion sort:")
+calculateTimeComplexity(insertionSort, numbers.copy())
+
+print("Quick sort:")
 calculateTimeComplexity(insertionSort, numbers.copy())
 
 print("---------------------------------------------------------------------")
