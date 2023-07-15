@@ -69,16 +69,18 @@ def calculateTimeComplexity(func, numbers):
 
 # The goal of this script is to calculate the time complexity of different sorting algorithms.
 
-
-if sys.argv.count == 1:
-	# No arguments given
-	# Create a random sized array (0-100) of random integers in the range of -1000 to 1000
-	print('hi')
-else:
+# Create an integer array to sort
+if len(sys.argv) > 1:
 	# Use integers given in command line
 	numbers = []
 	for arg in sys.argv[1:]:
 		numbers.append(int(arg))
+else:
+	# No arguments given. Create an array of random size (1-100) with random integers in the range of -1000 to 1000
+	numbers = []
+	for i in range(random.randint(0, 100)):
+		numbers.append(random.randint(-1000, 1000))
+
 
 print(f"=====================================================================\nsorting the following {len(numbers)} integers: {numbers}\n")
 
